@@ -78,5 +78,21 @@ pipeline{
             }
         }
 
+        stage("Push Changes of Deployment file to Git"){
+            steps{
+                script{
+                    sh """
+                      git config --global user.name "chandra Jenkins User"
+                      git config --global user.email "chandra.y@gmail.com"
+                      git add deployment.yaml
+                      git commit -m "Updated Deployment file"
+                    """
+                    withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                        git push "https://github.com/chandrayarramreddy/gitops_argocd_project.git" main
+                    }
+                }
+            }
+        }
+
     }
 }
