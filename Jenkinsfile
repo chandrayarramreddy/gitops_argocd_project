@@ -16,7 +16,7 @@ pipeline{
             steps{
                     
                   //  sh "sudo chown -R jenkins:chandra /var/lib/jenkins/"
-                  //  sh "docker ps"
+                    sh "docker images"
                    // sh "ll"
                    // sh "export MINIKUBE_HOME=/home/chandra/.minikube"
                    // sh "kubectl get pods"
@@ -53,6 +53,15 @@ pipeline{
                         docker_image.push("$BUILD_NUMBER")
                         docker_image.push('latest')
                     }
+                }
+            }
+        }
+
+        stage("Delete DOcker Image"){
+            steps{
+                script{
+                    sh"docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh"docker rmi ${IMAGE_NAME}:latest"
                 }
             }
         }
