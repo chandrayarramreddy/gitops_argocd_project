@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: flask-app-container
-        image: chandray/argo-app:11
+        image: chandray/argo-app:12
         resources:
           limits:
             memory: "128Mi"
